@@ -92,5 +92,52 @@ const c_melodic_minor_scale = generate_list_of_note("C4",
 const c_melodic_minor_scale_sound = list_to_sound(c_melodic_minor_scale, 0.4, cello);
 play(c_melodic_minor_scale_sound);
 
+//Q3
 
+// copy your functions generate_list_of_note and list_to_sound
+
+function generate_list_of_note(letter_name,list_of_interval){
+    const firstNoteNum = letter_name_to_midi_note(letter_name);
+    
+    
+    function noteHelper(list_of_interval,currentNoteNum){
+        if (length(list_of_interval) === 0) {
+            return list();
+        }
+        else {
+            const newCurrentNote = currentNoteNum + head(list_of_interval);
+            return append(list(newCurrentNote) 
+                          ,noteHelper(tail(list_of_interval),newCurrentNote));
+            
+        }
+        }
+    return append(list(firstNoteNum),(noteHelper(list_of_interval, firstNoteNum)));
+}
+
+
+
+function list_to_sound(list_of_midi_note, duration, instrument) {
+    function instrumentHelper(note){
+        return instrument(note,duration);
+    }
+    
+    const finalInstrument = consecutively(map(instrumentHelper,list_of_midi_note));
+    return (finalInstrument);
+}
+
+
+// from the previous Question here
+const major_arpeggio_interval = list(4, 3, 5, 4, 3, 5);
+const minor_arpeggio_interval = list(3, 4, 5, 3, 4, 5);
+
+function generate_arpeggio(letter_name, list_of_interval) {
+    return generate_list_of_note(letter_name, list_of_interval);
+}
+
+function arpeggiator_up(arpeggio, duration_each, instrument) {
+    /* your answer here */
+}
+
+// Test
+play(arpeggiator_up(generate_arpeggio("C4", major_arpeggio_interval), 0.1, cello));
     
