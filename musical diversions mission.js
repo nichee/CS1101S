@@ -134,10 +134,64 @@ function generate_arpeggio(letter_name, list_of_interval) {
     return generate_list_of_note(letter_name, list_of_interval);
 }
 
+display(generate_arpeggio("C4", major_arpeggio_interval));
+
 function arpeggiator_up(arpeggio, duration_each, instrument) {
     /* your answer here */
+    function sawtoothHelper(arpeggio){
+        if (length(arpeggio) < 4) {
+            return list();
+        }
+        
+        else {
+            const first = head(arpeggio);
+            const second = list_ref(arpeggio,1);
+            const third = list_ref(arpeggio,2);
+            const fourth = list_ref(arpeggio,3);
+            return append(list(first,second,third,fourth), 
+                          sawtoothHelper(tail(arpeggio)));
+        }
+    }
+    
+    return length(arpeggio) <4
+        ?silence_sound(0)
+        :list_to_sound(sawtoothHelper(arpeggio), duration_each, instrument);
 }
+play(arpeggiator_up(generate_arpeggio("C4"
+                                         , major_arpeggio_interval)
+                                         , 0.1, cello));
+
+
 
 // Test
-play(arpeggiator_up(generate_arpeggio("C4", major_arpeggio_interval), 0.1, cello));
-    
+//play(arpeggiator_up(generate_arpeggio("C4", major_arpeggio_interval), 0.1, cello));
+
+
+//Q4 
+function simplify_rhythm(rhythm) {
+  /* your answer here */
+  function rhythmMult(rhythm, n) {
+    return n === 0
+      ? null
+      : append(simplify_rhythm(rhythm), rhythmMult(rhythm, n - 1));
+  }
+
+  return is_list(rhythm) 
+    ? is_number(head(rhythm))
+            ? rhythm
+            : accumulate((x, y) => 
+                                append(simplify_rhythm(x), y), null, rhythm)
+                                
+    : rhythmMult(head(rhythm), tail(rhythm));
+}
+// Test
+const my_rhythm = pair(list(pair(list(1,2,0,1), 2), list(1,3,0,1,3,1,0,3)), 3);
+const my_simple_rhythm = simplify_rhythm(my_rhythm);
+display_list(my_simple_rhythm);
+
+const correct_simple_rhythm = list(1,2,0,1,1,2,0,1,1,3,0,1,3,1,0,3,1,2,0,1,1,
+        2,0,1,1,3,0,1,3,1,0,3,1,2,0,1,1,2,0,1,1,3,0,1,3,1,0,3);
+equal(my_simple_rhythm, correct_simple_rhythm);
+
+
+
