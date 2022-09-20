@@ -1,21 +1,31 @@
-
 function insert(bst, item) {
     // your answer here
+    const newTree = make_tree(item,make_empty_tree(),make_empty_tree());
     return is_empty_tree(bst)
-        ? make_tree(item, make_empty_tree(), make_empty_tree())
+        ? newTree
         : item === entry(bst) 
             ? bst //item already in list
             
             
             : item < entry(bst)
                 ?is_empty_tree(left_branch(bst))
-                    ? make_tree(entry(bst), 
-                                make_tree()) //set bst left to new item, create new item
-                    : insert(left_branch(bst), name)
+                    ? make_tree(entry(bst)
+                                , newTree
+                                , right_branch(bst)) //return bst with left set to new tree
+                                
+                    : make_tree(entry(bst)
+                                , insert(left_branch(bst), item)
+                                , right_branch(bst))
             
-                :is_empty_tree(right_branch(bst))
-                    ? 
-                    : insert(right_branch(bst), name);
+                :is_empty_tree(right_branch(bst)) //item > entry(bst)
+                
+                    ? make_tree(entry(bst)
+                                , left_branch(bst)
+                                , newTree)
+                        
+                    : make_tree(entry(bst)
+                                , left_branch(bst)
+                                , insert(right_branch(bst), item));
     
 
 }
@@ -67,12 +77,13 @@ function binary_search_tree_to_string(bst) {
 }
 
 
+
 // Test
 
-//binary_search_tree_to_string(insert(make_empty_tree(), "x"));
+binary_search_tree_to_string(insert(make_empty_tree(), "x"));
 // Should produce "x; "
 
-/*
+
 const bst = accumulate((item, bst) => insert(bst, item),
                        make_empty_tree(),
                        list("g", "a", "r", "x", "p"));
@@ -82,4 +93,3 @@ binary_search_tree_to_string(bst);
 const cadet_names_with_aaaaron =  insert(cadet_names, "AAAARON NORAAAA");
 binary_search_tree_to_string(cadet_names_with_aaaaron);
 // Should produce "AAAARON NORAAAA; ..."
-*/
