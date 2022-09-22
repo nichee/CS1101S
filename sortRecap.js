@@ -24,7 +24,7 @@ Split list into 2 subArrays, smaller and larger (than pivot size).
 Sort each subarray using wishful thinking 
 
 
-*/
+
 
 //insert element into sorted array
 
@@ -73,33 +73,62 @@ function selectionSort(array){
 }
 
 
-
+*/
 
 //display(selectionSort(list(5,3,6,8,7,4,2,26,8,8,21,1)));
 
 function merge(array1, array2){ // merge 2 sorted lists into 1
     //should not receive 2 empty lists
     if (is_null(array1)){
-        return array2
+        return array2;
     }
     else{
         if (is_null(array2)){
-            return array1
+            return array1;
         }
         else{
-            head = 
+            const head1 = head(array1);
+            const head2 = head(array2);
             
+            return head1 <= head2
+                ? pair(head1, merge(tail(array1), array2))
+                : pair(head2, merge(array1, tail(array2)));
             
             
         }
     }
     
-    
-    
+
 }
-function mergeSort(array){
-    return 1;
+
+function take(array, num){
+    return num === 0
+        ? null
+        : append(list(head(array)), take(tail(array), num - 1));
 }
+
+display(take(list(1,2,3,4,5,6),4));
+
+function drop(array, num){
+    return num === 0 
+        ? array
+        : drop(tail(array), num - 1);
+}
+
+display(drop(list(1,2,3,4,5,6),1));
+
+function mergeSort(array){ //halves the list, returns merge(half1,half2)
+    if (length(array) <= 1){
+        return array;
+    }
+    
+    else{
+        const midIndex = math_floor(length(array)/2);
+        
+    }
+}
+
+
 
 
 
