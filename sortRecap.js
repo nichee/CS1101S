@@ -1,25 +1,26 @@
 
 /*
-1)insertionSort
+1)insertionSort (n, n^2, n^2)
 Sort the tail of the given list using wishful thinking!
 Insert the head in the right place
 NOTE : deal with len 0 and len 1 arrays
 
 
-2)selectionSort
+2)selectionSort (n^2, n^2, n^2)
 Find the smallest element x and remove it from the list
 Sort the remaining list, and put x in front
 
 
 
-3)mergeSort
+3)mergeSort (nlogn, nlogn, nlogn)
 Split the list in half, sort each half using wishful thinking
 Merge the sorted lists together
 
 take, drop, merge (two sorted lists into one sorted list), mergeSort(halve list,
 sort both halves and merge
 
-4)quickSort
+
+4)quickSort (nlogn, nlogn, n^2)
 Split list into 2 subArrays, smaller and larger (than pivot size).
 Sort each subarray using wishful thinking 
 
