@@ -1,5 +1,5 @@
-/*
 
+/*
 1)insertionSort
 Sort the tail of the given list using wishful thinking!
 Insert the head in the right place
@@ -23,7 +23,7 @@ sort both halves and merge
 Split list into 2 subArrays, smaller and larger (than pivot size).
 Sort each subarray using wishful thinking 
 
-
+*/
 
 
 //insert element into sorted array
@@ -73,7 +73,7 @@ function selectionSort(array){
 }
 
 
-*/
+
 
 //display(selectionSort(list(5,3,6,8,7,4,2,26,8,8,21,1)));
 
@@ -93,8 +93,6 @@ function merge(array1, array2){ // merge 2 sorted lists into 1
             return head1 <= head2
                 ? pair(head1, merge(tail(array1), array2))
                 : pair(head2, merge(array1, tail(array2)));
-            
-            
         }
     }
     
@@ -107,7 +105,7 @@ function take(array, num){
         : append(list(head(array)), take(tail(array), num - 1));
 }
 
-display(take(list(1,2,3,4,5,6),4));
+
 
 function drop(array, num){
     return num === 0 
@@ -115,20 +113,43 @@ function drop(array, num){
         : drop(tail(array), num - 1);
 }
 
-display(drop(list(1,2,3,4,5,6),1));
+
 
 function mergeSort(array){ //halves the list, returns merge(half1,half2)
     if (length(array) <= 1){
         return array;
     }
-    
     else{
         const midIndex = math_floor(length(array)/2);
+        return (merge(mergeSort(take(array, midIndex))
+                , mergeSort(drop(array, midIndex))));
         
     }
 }
 
+//display(mergeSort(list(38,27,43,3,9,82,10)));
 
+
+
+
+function quickSort(array){
+    if (length(array) <= 1){
+        return array;
+    }
+    
+    else{
+        const pivot = head(array);
+        const lower = filter(x => x <= pivot, tail(array));
+        const higher = filter(x => x > pivot, tail(array));
+
+        
+        return append(quickSort(lower), append(list(pivot), quickSort(higher)));
+        
+        
+    }
+}
+
+display(quickSort(list(38,27,43,3,9,82,10)));
 
 
 
