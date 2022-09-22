@@ -3,6 +3,7 @@
 1)insertionSort
 Sort the tail of the given list using wishful thinking!
 Insert the head in the right place
+NOTE : deal with len 0 and len 1 arrays
 
 
 2)selectionSort
@@ -26,29 +27,79 @@ Sort each subarray using wishful thinking
 */
 
 //insert element into sorted array
+
 function insert(element, array){ 
-    if (is_null(array)) {
+    if (is_null(array)){
         return array;
     }
     else {
         return element <= head(array)
             ? pair(element, array)
-            : pair(head(array), insert(element, tail(array)));
+            : length(array) === 1
+                ? append(array, list(element))
+                : pair(head(array), insert(element, tail(array)));
+            
     }
 }
-display (insert(5,list(3,4)));
-
-
 
 
 function insertionSort(array){
-    return length(array) === 1
+    return length(array) <= 1
         ? array
         : insert(head(array), insertionSort(tail(array)));
 }
 
+//display(insertionSort(list(5,3,6,8,7,4,2,26,8,8,21,1)));
 
 
+function smallest(array){ // return smallest, min size 2
+    return head(array) > head(tail(array)) // compare first to second element
+        ? length(array) === 2
+            ? head(tail(array)) // if use tail(array), will return [num, null]
+                                // can also use list_ref(array,1)
+            : smallest(tail(array)) //remove head as it is larger
+            
+        : length(array) === 2
+            ? head(array)
+            : smallest(append(list(head(array)), tail(tail(array)))); //remove second element
+}
+
+
+
+function selectionSort(array){
+    return length(array) <= 1
+        ? array
+        : pair(smallest(array), selectionSort(remove(smallest(array),array)));
+}
+
+
+
+
+//display(selectionSort(list(5,3,6,8,7,4,2,26,8,8,21,1)));
+
+function merge(array1, array2){ // merge 2 sorted lists into 1
+    //should not receive 2 empty lists
+    if (is_null(array1)){
+        return array2
+    }
+    else{
+        if (is_null(array2)){
+            return array1
+        }
+        else{
+            head = 
+            
+            
+            
+        }
+    }
+    
+    
+    
+}
+function mergeSort(array){
+    return 1;
+}
 
 
 
