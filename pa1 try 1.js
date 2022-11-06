@@ -100,7 +100,9 @@ function find_gene_start(xs) {
         ? null
         : head(xs) === 'A'
             ? checkTG(xs)
-                ? tail(tail(tail(xs)))
+                ? length(xs) === 3
+                    ? list(null)
+                    : tail(tail(tail(xs)))
                 : find_gene_start(tail(xs))
             : find_gene_start(tail(xs));
     return checkTG(xs);
@@ -108,11 +110,11 @@ function find_gene_start(xs) {
 
 }
 
-find_gene_start(list("A", "C", "A", "T", "G", "T", "A", "C"));
+//find_gene_start(list("A", "C", "A", "T", "G", "T", "A", "C"));
 // returns list(list("T", "A", "C"))
-find_gene_start(list("A", "T", "A", "G", "T", "A", "T", "G"));
+//find_gene_start(list("A", "T", "A", "G", "T", "A", "T", "G"));
 // returns list(null)
-find_gene_start(list("A", "T", "A", "G", "T", "A", "C", "G"));
+//find_gene_start(list("A", "T", "A", "G", "T", "A", "C", "G"));
 // returns null
 
 
