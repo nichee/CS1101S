@@ -5,22 +5,46 @@
 function is_nucleobase(s) {
 
     // WRITE HERE.
+    return s === 'A'
+        ? true
+        : s === 'C'
+            ? true 
+            : s === 'G'
+                ? true
+                : s === 'T'
+                    ? true
+                    : false;
 
 }
-
 
 
 ////////////////////////////////////////////////////////////
 // Question 1B
 ////////////////////////////////////////////////////////////
 
-function is_dna_strand(xs) {
+function allTrue (list) {
+    if (length(list) === 0){
+        return true;
+    }
+    
+    return head(list)
+        ? allTrue(tail(list))
+        : false;
+        
+}
 
+function is_dna_strand(xs) {
     // WRITE HERE.
+    return allTrue(map(is_nucleobase, xs));
+
 
 }
 
 
+//is_dna_strand(list("A", "G", "A")); // true
+//is_dna_strand(list("A", "B", "B", "A")); // false
+//is_dna_strand(list("T", "G", "C")); // true
+//is_dna_strand(list("T", "G", "Otto")); // false
 
 ////////////////////////////////////////////////////////////
 // Question 1C
