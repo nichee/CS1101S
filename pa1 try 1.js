@@ -51,10 +51,17 @@ function is_dna_strand(xs) {
 ////////////////////////////////////////////////////////////
 
 function combine(xss) {
-
-    // WRITE HERE.
+    return length(xss) === 0
+        ? list()
+        : append(head(xss), combine(tail(xss)));
 
 }
+    // WRITE HERE.
+
+/*combine(list(list("A", "G", "A"),
+list("G", "C", "T", "A"), list("C")));
+combine(list(list("G"), list("T"),
+list("C", "A", "A", "A"), list("G")));*/
 
 
 
@@ -62,24 +69,51 @@ function combine(xss) {
 // Question 1D
 ////////////////////////////////////////////////////////////
 
+
+
+
 function oxoguanine_repair(xs) {
+    const convert = x => x === '8' ? 'G' : x;
+    return map(convert, xs);
 
     // WRITE HERE.
 
 }
-
+/*oxoguanine_repair(
+list("A", "8", "A", "8", "C", "T", "A", "C"));*/
 
 
 ////////////////////////////////////////////////////////////
 // Question 1E
 ////////////////////////////////////////////////////////////
 
-function find_gene_start(xs) {
 
+function find_gene_start(xs) {
+    function checkTG(list){
+        return length(list) < 3
+            ? false
+            : head(tail(list)) === 'T' && head(tail(tail(list))) === 'G';
+                
+    }
+    
+    return length(xs) === 0
+        ? null
+        : head(xs) === 'A'
+            ? checkTG(xs)
+                ? tail(tail(tail(xs)))
+                : find_gene_start(tail(xs))
+            : find_gene_start(tail(xs));
+    return checkTG(xs);
     // WRITE HERE.
 
 }
 
+find_gene_start(list("A", "C", "A", "T", "G", "T", "A", "C"));
+// returns list(list("T", "A", "C"))
+find_gene_start(list("A", "T", "A", "G", "T", "A", "T", "G"));
+// returns list(null)
+find_gene_start(list("A", "T", "A", "G", "T", "A", "C", "G"));
+// returns null
 
 
 ////////////////////////////////////////////////////////////
@@ -87,7 +121,7 @@ function find_gene_start(xs) {
 ////////////////////////////////////////////////////////////
 
 function find_gene_end(xs) {
-
+    
     // WRITE HERE.
 
 }
