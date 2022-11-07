@@ -173,20 +173,75 @@ function all_different(nums) {
     if (length(nums) < 2) { //length 0 or 1
         return true;
     }
-    for (let x = 0; x < (length(nums) - 1); x = x + 1) {
+    for (let x = 1; x < length(nums);  x = x + 1) {
+        display(x);
         if (head(nums) === list_ref(nums, x)){
             return false;
         }
+    }
+    
     return (all_different(tail(nums)));
-    display(x);
-}
+    
 
+}
 
 display(all_different(list(2, 5, 1, 6, 7, 4, 3)));
-// returns true
-// returns true
+function assert(f, test_name, fnames) {
+    display(test_name + ": " + (f() ? "PASS" : "FAIL"));
+assert(
+    () => {
+        const nums = list(23);
+        return equal(all_different(nums), true);
+    },
+    "Q2A-T1",
+    ['all_different']
+);
 
-}
+assert(
+    () => {
+        const nums = list(2, 5, 1, 6, 7, 4, 3);
+        return equal(all_different(nums), true);
+    },
+    "Q2A-T2",
+    ['all_different']
+);
+
+assert(
+    () => {
+        const nums = list(2, 6, 1, 7, 6, 4, 3);
+        return equal(all_different(nums), false);
+    },
+    "Q2A-T3",
+    ['all_different']
+);
+
+assert(
+    () => {
+        const nums = list(3, 2);
+        return equal(all_different(nums), true);
+    },
+    "Q2A-T4",
+    ['all_different']
+);
+
+assert(
+    () => {
+        const nums = list(3, 2, 1, 9, 8);
+        return equal(all_different(nums), true);
+    },
+    "Q2A-T5",
+    ['all_different']
+);
+
+assert(
+    () => {
+        const nums = list(2, 6, 3, 7, 6, 6, 3, 1);
+        return equal(all_different(nums), false);
+    },
+    "Q2A-T6",
+    ['all_different']
+);
+
 
 
 
