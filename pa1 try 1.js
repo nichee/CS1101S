@@ -207,7 +207,6 @@ function is_valid_toto_set(nums, n, min, max) {
     }
     
     for (let i=0; i < n; i = i + 1){
-        display(list_ref(nums, i));
         if (list_ref(nums, i) < min || list_ref(nums,i) > max){
             return false;
         }
@@ -229,11 +228,24 @@ is_valid_toto_set(nums, n, min, max);*/
 ////////////////////////////////////////////////////////////
 
 function num_of_matches(numsA, numsB) {
-
     // WRITE HERE.
+    let currMatches = 0;
+    for (let i = 0; i < length(numsA); i = i+1){
+        for (let j = 0; j < length(numsB); j = j+1){
+            if (list_ref(numsA, i) === list_ref(numsB, j)){
+                currMatches = currMatches + 1;
+            }
+        }
+    }
+    return currMatches;
+    
 
 }
 
+/*const numsA = list(23, 21, 30, 15, 40);
+const numsB = list(3, 40, 15, 20 );
+num_of_matches(numsA, numsB);
+// returns 2*/
 
 
 ////////////////////////////////////////////////////////////
@@ -241,6 +253,87 @@ function num_of_matches(numsA, numsB) {
 ////////////////////////////////////////////////////////////
 
 function check_winning_group(bet_nums, draw_nums, extra_num) {
+    // WRITE HERE.
+    let matchNums = num_of_matches(bet_nums, draw_nums);
+    let extraBin = 0;
+    const len = length(bet_nums);
+    for (let i = 0; i < length(draw_nums); i = i+1){
+        if (list_ref(bet_nums, i) === extra_num){
+            extraBin = 1;
+        }
+    }
+    
+    
+    return matchNums === len
+        ? 1
+        : matchNums === len - 1
+            ? extraBin === 1
+                ? 2
+                : 3
+            :matchNums === len - 2
+                ? extraBin === 1
+                    ? 4
+                    : 5
+                : 0;
+    
+
+}
+/*const bet_nums = list(40, 30, 1, 49, 23, 15);
+const draw_nums = list(23, 1, 30, 15, 40, 49);
+const extra_num = 27;
+check_winning_group(bet_nums, draw_nums, extra_num);
+// returns 1*/
+
+const bet_nums = list(40, 30, 1, 49, 27, 15);
+const draw_nums = list(23, 1, 30, 15, 40, 49);
+const extra_num = 27;
+check_winning_group(bet_nums, draw_nums, extra_num);
+// returns 2
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////
+// Question 3A
+////////////////////////////////////////////////////////////
+
+function evaluate_BAE_tree(bae_tree) {
+    function baeHelper(basicBAE){
+        if (head(tail(basicBAE)) === '+'){
+            return head(basicBAE) + head(tail(tail(basicBAE)));
+        }
+        if (head(tail(basicBAE)) === '-'){
+            return head(basicBAE) - head(tail(tail(basicBAE)));
+        }
+        if (head(tail(basicBAE)) === '*'){
+            return head(basicBAE) * head(tail(tail(basicBAE)));
+        }
+        if (head(tail(basicBAE)) === '/'){
+            return head(basicBAE) / head(tail(tail(basicBAE)));
+        }
+        
+        
+        
+        
+        
+    }
+
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Question 3B
+////////////////////////////////////////////////////////////
+
+function build_BAE_tree(bae_list) {
 
     // WRITE HERE.
 
@@ -249,14 +342,26 @@ function check_winning_group(bet_nums, draw_nums, extra_num) {
 
 
 ////////////////////////////////////////////////////////////
+// Question 3C
 ////////////////////////////////////////////////////////////
+
+function evaluate_BAE(bae_list) {
+
+    // WRITE HERE.
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Question 3D
 ////////////////////////////////////////////////////////////
 
+function check_parentheses(paren_list) {
 
+    // WRITE HERE.
 
-
-
-
+}
 
 
 
