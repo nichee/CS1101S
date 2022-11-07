@@ -89,6 +89,7 @@ list("A", "8", "A", "8", "C", "T", "A", "C"));*/
 
 
 function find_gene_start(xs) {
+    // WRITE HERE.
     function checkTG(list){
         return length(list) < 3
             ? false
@@ -102,15 +103,16 @@ function find_gene_start(xs) {
             ? checkTG(xs)
                 ? length(xs) === 3
                     ? list(null)
-                    : tail(tail(tail(xs)))
+                    : list(tail(tail(tail(xs))))
                 : find_gene_start(tail(xs))
             : find_gene_start(tail(xs));
     return checkTG(xs);
-    // WRITE HERE.
+
 
 }
 
 //find_gene_start(list("A", "C", "A", "T", "G", "T", "A", "C"));
+
 // returns list(list("T", "A", "C"))
 //find_gene_start(list("A", "T", "A", "G", "T", "A", "T", "G"));
 // returns list(null)
@@ -123,8 +125,22 @@ function find_gene_start(xs) {
 ////////////////////////////////////////////////////////////
 
 function find_gene_end(xs) {
-    
     // WRITE HERE.
+    function checkStop(list){
+        return length(list) < 3
+            ? false
+            : head(tail(list)) === 'A' && head(tail(tail(list))) === 'G'
+                ? true
+                : head(tail(list)) === 'A' && head(tail(tail(list))) === 'A'
+                    ? true
+                    : head(tail(list)) === 'G' && head(tail(tail(list))) === 'A'
+                        ? true
+                        : false;
+                    
+    }  
+    
+    return checkStop(xs);
+    
 
 }
 
@@ -145,3 +161,92 @@ function all_genes(xs) {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////
+// Question 2A
+////////////////////////////////////////////////////////////
+
+function all_different(nums) {
+    if (length(nums) < 2) { //length 0 or 1
+        return true;
+    }
+    for (let x = 0; x < (length(nums) - 1); x = x + 1) {
+        if (head(nums) === list_ref(nums, x)){
+            return false;
+        }
+    return (all_different(tail(nums)));
+    display(x);
+}
+
+
+display(all_different(list(2, 5, 1, 6, 7, 4, 3)));
+// returns true
+// returns true
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Question 2B
+////////////////////////////////////////////////////////////
+
+function is_valid_toto_set(nums, n, min, max) {
+
+    // WRITE HERE.
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Question 2C
+////////////////////////////////////////////////////////////
+
+function num_of_matches(numsA, numsB) {
+
+    // WRITE HERE.
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Question 2D
+////////////////////////////////////////////////////////////
+
+function check_winning_group(bet_nums, draw_nums, extra_num) {
+
+    // WRITE HERE.
+
+}
+
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
