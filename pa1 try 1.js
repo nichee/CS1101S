@@ -302,9 +302,7 @@ check_winning_group(bet_nums, draw_nums, extra_num);
 ////////////////////////////////////////////////////////////
 // Question 3A
 ////////////////////////////////////////////////////////////
-
-function evaluate_BAE_tree(bae_tree) {
-    function baeHelper(basicBAE){
+function baeHelper(basicBAE){
         if (head(tail(basicBAE)) === '+'){
             return head(basicBAE) + head(tail(tail(basicBAE)));
         }
@@ -318,15 +316,33 @@ function evaluate_BAE_tree(bae_tree) {
             return head(basicBAE) / head(tail(tail(basicBAE)));
         }
         
-        
-        
-        
-        
     }
-
-
+function evaluate_BAE_tree(bae_tree) {
+    if (is_number(bae_tree)){
+        return bae_tree;
+    }
+    if (is_number(head(bae_tree)) && is_number(head(tail(tail(bae_tree))))){
+        return baeHelper(bae_tree);
+    }
+    
+    let newList = bae_tree;
+    if (is_list(head(bae_tree))) {
+        const tree1 = evaluate_BAE_tree(head(bae_tree));
+    }
+    if (is_list(head(tail(tail(bae_tree))))) {
+        const tree2 = evaluate_BAE_tree(head(tail(tail(bae_tree))));
+    
+    
+    return (baeHelper(bae_tree));
+    
+    
+    
+    
 }
 
+const baeTree = list( list(2, "+", 5), "*", 100 );
+evaluate_BAE_tree(baeTree);
+// returns 700
 
 
 ////////////////////////////////////////////////////////////
