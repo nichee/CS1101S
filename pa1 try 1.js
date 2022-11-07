@@ -185,63 +185,11 @@ function all_different(nums) {
 
 }
 
-display(all_different(list(2, 5, 1, 6, 7, 4, 3)));
-function assert(f, test_name, fnames) {
-    display(test_name + ": " + (f() ? "PASS" : "FAIL"));
-assert(
-    () => {
-        const nums = list(23);
-        return equal(all_different(nums), true);
-    },
-    "Q2A-T1",
-    ['all_different']
-);
 
-assert(
-    () => {
-        const nums = list(2, 5, 1, 6, 7, 4, 3);
-        return equal(all_different(nums), true);
-    },
-    "Q2A-T2",
-    ['all_different']
-);
-
-assert(
-    () => {
-        const nums = list(2, 6, 1, 7, 6, 4, 3);
-        return equal(all_different(nums), false);
-    },
-    "Q2A-T3",
-    ['all_different']
-);
-
-assert(
-    () => {
-        const nums = list(3, 2);
-        return equal(all_different(nums), true);
-    },
-    "Q2A-T4",
-    ['all_different']
-);
-
-assert(
-    () => {
-        const nums = list(3, 2, 1, 9, 8);
-        return equal(all_different(nums), true);
-    },
-    "Q2A-T5",
-    ['all_different']
-);
-
-assert(
-    () => {
-        const nums = list(2, 6, 3, 7, 6, 6, 3, 1);
-        return equal(all_different(nums), false);
-    },
-    "Q2A-T6",
-    ['all_different']
-);
-
+/*for loop test
+for (let i = 0; i <= 10; i = i + 1){
+    display(i);
+}*/
 
 
 
@@ -250,11 +198,30 @@ assert(
 ////////////////////////////////////////////////////////////
 
 function is_valid_toto_set(nums, n, min, max) {
-
     // WRITE HERE.
-
+    if (length(nums) !== n) {
+        return false;
+    }
+    if (all_different(nums) === false) {
+        return false;
+    }
+    
+    for (let i=0; i < n; i = i + 1){
+        display(list_ref(nums, i));
+        if (list_ref(nums, i) < min || list_ref(nums,i) > max){
+            return false;
+        }
+    }
+    return true;
 }
 
+/*const nums = list(25, 13, 8, 14, 30, 3, 8);
+const n = 7;
+const min = 3;
+const max = 30;
+is_valid_toto_set(nums, n, min, max);*/
+// returns false
+// Reason: 8 appears twice in nums.
 
 
 ////////////////////////////////////////////////////////////
