@@ -1,6 +1,8 @@
 //qn 2b-------------------------
 function runlength_decode(R) {
-
+    if (length(L) <2){
+        return L;
+    }
     // WRITE YOUR SOLUTION HERE.
 
 }
