@@ -1,6 +1,6 @@
 function is_pa_word(s) {
     // your solution goes here
-    for (let i=0, i<length(pa_words))
+    for (let i=0; i<length(pa_words), i=i+1)
 }
 
 display(pa_words);
