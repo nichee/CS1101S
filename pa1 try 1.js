@@ -319,28 +319,25 @@ function baeHelper(basicBAE){
     }
 function evaluate_BAE_tree(bae_tree) {
     if (is_number(bae_tree)){
+        display(bae_tree);
         return bae_tree;
     }
-    if (is_number(head(bae_tree)) && is_number(head(tail(tail(bae_tree))))){
+    if (is_number(head(bae_tree)) && is_number(list_ref(bae_tree,2))){
+        display(baeHelper(bae_tree));
         return baeHelper(bae_tree);
     }
     
-    let newList = bae_tree;
-    if (is_list(head(bae_tree))) {
-        const tree1 = evaluate_BAE_tree(head(bae_tree));
-    }
-    if (is_list(head(tail(tail(bae_tree))))) {
-        const tree2 = evaluate_BAE_tree(head(tail(tail(bae_tree))));
-    
-    
-    return (baeHelper(bae_tree));
+    return (evaluate_BAE_tree(list(evaluate_BAE_tree(head(bae_tree)), 
+                                head(tail(bae_tree)), 
+                              evaluate_BAE_tree(list_ref(bae_tree, 2)))
+                              ));
     
     
     
     
 }
 
-const baeTree = list( list(2, "+", 5), "*", 100 );
+const baeTree = list( list(2, "+", 5), "*", list(100, '*', list(1, '+', 1)));
 evaluate_BAE_tree(baeTree);
 // returns 700
 
@@ -378,6 +375,9 @@ function check_parentheses(paren_list) {
     // WRITE HERE.
 
 }
+
+
+
 
 
 
